@@ -1,9 +1,7 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable,
-         :rememberable, :trackable, :validatable,
-     :omniauthable, :omniauth_providers => [:google_oauth2]
+  devise :database_authenticatable, :omniauthable, :omniauth_providers => [:google_oauth2]
      
   def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
     data = access_token.info
@@ -22,6 +20,6 @@ class User < ActiveRecord::Base
           password: Devise.friendly_token[0,20],
         )
       end
-   end
- end
+    end
+  end
 end
